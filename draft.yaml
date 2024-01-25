@@ -1,0 +1,47 @@
+models:
+  User:
+    name: string
+    email: string
+    email_verified_at: timestamp nullable
+    password: string
+    remember_token: string nullable
+    timestamps: true
+    
+  Post:
+    title: string:400
+    content: longtext
+    user_id: id:foreign
+    published_at: nullable timestamp
+    softDeletes: true
+    timestamps: true
+    relationships:
+      belongsToMany: Category, Tag
+      belongsTo: User
+
+  Category:
+    name: string:255
+    description: nullable text
+    timestamps: false
+    relationships:
+      belongsToMany: Post
+
+  Tag:
+    name: string:255
+    timestamps: false
+    relationships:
+      belongsToMany: Post
+  
+controllers:
+  PostController:
+    resource: api
+
+  CategoryController:
+    resource: api
+
+  TagController:
+    resource: api
+
+  UserController:
+    resource: api
+
+

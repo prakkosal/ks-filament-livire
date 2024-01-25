@@ -1,0 +1,46 @@
+created:
+    - app/Http/Controllers/PostController.php
+    - app/Http/Controllers/CategoryController.php
+    - app/Http/Controllers/TagController.php
+    - app/Http/Controllers/UserController.php
+    - database/factories/UserFactory.php
+    - database/factories/PostFactory.php
+    - database/factories/CategoryFactory.php
+    - database/factories/TagFactory.php
+    - database/migrations/2024_01_23_051032_create_users_table.php
+    - database/migrations/2024_01_23_051033_create_posts_table.php
+    - database/migrations/2024_01_23_051034_create_categories_table.php
+    - database/migrations/2024_01_23_051035_create_tags_table.php
+    - database/migrations/2024_01_23_051036_create_category_post_table.php
+    - database/migrations/2024_01_23_051037_create_post_tag_table.php
+    - app/Models/User.php
+    - app/Models/Post.php
+    - app/Models/Category.php
+    - app/Models/Tag.php
+    - tests/Feature/Http/Controllers/PostControllerTest.php
+    - tests/Feature/Http/Controllers/CategoryControllerTest.php
+    - tests/Feature/Http/Controllers/TagControllerTest.php
+    - tests/Feature/Http/Controllers/UserControllerTest.php
+    - app/Http/Requests/PostStoreRequest.php
+    - app/Http/Requests/PostUpdateRequest.php
+    - app/Http/Requests/CategoryStoreRequest.php
+    - app/Http/Requests/CategoryUpdateRequest.php
+    - app/Http/Requests/TagStoreRequest.php
+    - app/Http/Requests/TagUpdateRequest.php
+    - app/Http/Requests/UserStoreRequest.php
+    - app/Http/Requests/UserUpdateRequest.php
+    - app/Http/Resources/PostCollection.php
+    - app/Http/Resources/PostResource.php
+    - app/Http/Resources/CategoryCollection.php
+    - app/Http/Resources/CategoryResource.php
+    - app/Http/Resources/TagCollection.php
+    - app/Http/Resources/TagResource.php
+    - app/Http/Resources/UserCollection.php
+    - app/Http/Resources/UserResource.php
+updated:
+    - routes/api.php
+models:
+    User: { name: string, email: string, email_verified_at: 'timestamp nullable', password: string, remember_token: 'string nullable', timestamps: timestamps }
+    Post: { title: 'string:400', content: longtext, user_id: 'id:foreign', published_at: 'nullable timestamp', softdeletes: softDeletes, timestamps: timestamps, relationships: { belongsToMany: 'Category, Tag', belongsTo: User } }
+    Category: { name: 'string:255', description: 'nullable text', timestamps: false, relationships: { belongsToMany: Post } }
+    Tag: { name: 'string:255', timestamps: false, relationships: { belongsToMany: Post } }
